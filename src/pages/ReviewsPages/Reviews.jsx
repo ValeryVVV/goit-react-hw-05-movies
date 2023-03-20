@@ -1,4 +1,4 @@
-import { getMovieReview, IMAGE_URL } from "api/movie-api";
+import { getMovieReview } from "api/movie-api";
 import React from "react"
 import { useState } from "react";
 import { useEffect } from "react";

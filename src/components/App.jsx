@@ -1,6 +1,5 @@
 import Cast from "pages/CastPages/Cast";
 import Home from "pages/HomePage/HomePage";
-import MovieDetails from "pages/MovieDetailsPage/MovieDetails";
 import NotFound from "pages/NotFoundPage/NotFoundPage";
 import Reviews from "pages/ReviewsPages/Reviews";
 import SearchMovie from "pages/SearchMoviesPages/SearchMovies";

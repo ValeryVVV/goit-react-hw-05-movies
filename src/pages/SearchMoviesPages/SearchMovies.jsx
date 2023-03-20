@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { getSearchMovies } from 'api/movie-api';
 import PropTypes from 'prop-types';
