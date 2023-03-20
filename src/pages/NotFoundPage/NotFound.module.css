@@ -1,0 +1,14 @@
+.btn {
+  border: 1px solid black;
+  width: 100px;
+  padding: 8px;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.wrap {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}

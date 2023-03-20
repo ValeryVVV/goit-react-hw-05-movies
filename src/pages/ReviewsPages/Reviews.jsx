@@ -2,8 +2,9 @@ import { getMovieReview, IMAGE_URL } from "api/movie-api";
 import React from "react"
 import { useState } from "react";
 import { useEffect } from "react";
+import PropTypes from 'prop-types';
 
-export default function Cast({ movieId }) {
+export default function Reviews({ movieId }) {
     const [review, setReview] = useState([]);
 
     useEffect(() => {
@@ -35,3 +36,7 @@ export default function Cast({ movieId }) {
       </>
   );
 }
+
+Reviews.propTypes = {
+    movieId: PropTypes.string.isRequired,
+  };

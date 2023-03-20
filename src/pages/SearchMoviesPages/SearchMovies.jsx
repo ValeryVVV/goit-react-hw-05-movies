@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { getSearchMovies } from 'api/movie-api';
+import PropTypes from 'prop-types';
+
+
+import style from './SearchMovies.module.css';
 
 const SearchMovie = () => {
   const [movieToFind, setMovieToFind] = useState('');
@@ -29,21 +33,22 @@ const SearchMovie = () => {
 
   return (
     <>
-      <header>
-        <form  onSubmit={handleSubmit}>
-          <input
-            onChange={e => setMovieToFind(e.target.value)}
-            type="text"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search movie"
-            value={movieToFind}
-          />
-          <button type="submit">
-            search
-          </button>
-        </form>
-      </header>
+      <header className={style.searchbar}>
+            <form onSubmit={handleSubmit} className={style.form}>
+                <input
+                onChange={e => setMovieToFind(e.target.value)}
+                type="text"
+                autoComplete="off"
+                className={style.searchForm_input}
+                autoFocus
+                placeholder="Search movie"
+                value={movieToFind}
+            />
+                <button type='submit' className={style.searchForm_button}>
+                    Search
+                </button>
+            </form>
+        </header>
       {movies.map(
             ({
                 id, 
@@ -64,3 +69,8 @@ const SearchMovie = () => {
 };
 
 export default SearchMovie;
+
+SearchMovie.propTypes = {
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  };

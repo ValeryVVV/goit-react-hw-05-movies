@@ -1,7 +1,10 @@
-import { getTrendingMovies } from "api/movie-api"
 import React, { useEffect } from "react"
 import { useState } from "react"
 import { Link, useLocation } from "react-router-dom";
+import PropTypes from 'prop-types';
+
+import style from './HomePage.module.css';
+import { getTrendingMovies } from "api/movie-api"
 
 export default function Home() {
     const [movie, setMovie] = useState([]);
@@ -19,8 +22,8 @@ export default function Home() {
     }, [])
 
     return (
-        <>
-        <h1>Trending today</h1>
+        <div className={style.wrapper}>
+        <h1 className={style.title}>Trending today</h1>
 
         {movie.map(
             ({
@@ -37,6 +40,11 @@ export default function Home() {
 
             )
             )};
-        </>
+        </div>
     )
 }
+
+Home.propTypes = {
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  };

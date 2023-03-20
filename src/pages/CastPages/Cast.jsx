@@ -2,6 +2,7 @@ import { getMovieCast, IMAGE_URL } from "api/movie-api";
 import React from "react"
 import { useState } from "react";
 import { useEffect } from "react";
+import PropTypes from 'prop-types';
 
 export default function Cast({ movieId }) {
     const [cast, setCast] = useState([]);
@@ -38,3 +39,11 @@ export default function Cast({ movieId }) {
     </ul>
   );
 }
+
+Cast.propTypes = {
+    movieId: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    profile_path: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    character: PropTypes.string.isRequired,
+  };

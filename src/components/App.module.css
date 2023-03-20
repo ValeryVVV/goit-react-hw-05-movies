@@ -1,0 +1,15 @@
+.nav_container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  background-color: rgb(114, 173, 173);
+  height: 70px;
+  padding-left: 30px;
+}
+
+.container {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
