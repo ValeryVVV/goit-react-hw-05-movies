@@ -1,10 +1,11 @@
 import React, { Suspense, useEffect } from "react"
 import { useState } from "react"
-import { Link, Outlet, useLocation, useParams } from "react-router-dom";
-import PropTypes from 'prop-types';
+import { Link, Route, Routes, useLocation, useParams } from "react-router-dom";
 
 import style from './MovieDetails.module.css';
 import { getMovieDetails, IMAGE_URL } from "api/movie-api"
+import Cast from "pages/CastPages/Cast";
+import Reviews from "pages/ReviewsPages/Reviews";
 
 
 export default function MovieDetails() {
@@ -14,15 +15,18 @@ export default function MovieDetails() {
 
     const location = useLocation();
 
-    
+
   useEffect(() => {
-    const getMovie = async () => {
-      const currentMovie = await getMovieDetails(movieId);
-
-      setMovie(currentMovie);
+    if (!movieId) return;
+    const getMoviesDetails = async id => {
+      try {
+        const receivedDetails = await getMovieDetails(id);
+        setMovie(receivedDetails);
+      } catch (err) {
+       console.log(err);
+      }
     };
-
-    getMovie();
+    getMoviesDetails(movieId);
   }, [movieId]);
   
     const backLink = location.state?.from ?? "/";
@@ -54,21 +58,32 @@ export default function MovieDetails() {
                 </div>
                 <div className={style.additional_info}>
                 <h2>Additional information</h2>
-                <ul className={style.additional_ul}>
-                    <li>
-                        <Link to={`/movies/${movieId}/cast`} state={{ from: location }}>
-                            Cast
-                        </Link>
+            <ul className={style.additional_ul}>
+                <li>
+                <Link
+                    style={{ textDecoration: 'none' }}
+                    state={{ from: location?.state?.from ?? '/' }}
+                    to="reviews"
+                >
+                    Reviews
+                </Link>
+                </li>
+                <li>
+                <Link
+                    style={{ textDecoration: 'none' }}
+                    state={{ from: location?.state?.from ?? '/' }}
+                    to="cast"
+                >
+                    Cast
+                </Link>
+                </li>
 
-                    </li>
-                    <li>
-                        <Link to={`/movies/${movieId}/review`} state={{ from: location }}>
-                            Review
-                        </Link>
-                    </li>
-                </ul>
+            </ul>
                 <Suspense fallback={<div>Loading...</div>}>
-                <Outlet />
+                    <Routes>
+                        <Route path="cast" element={<Cast />} />
+                        <Route path="reviews" element={<Reviews />} />
+                    </Routes>
                 </Suspense>
                     
                 </div>
@@ -79,13 +94,3 @@ export default function MovieDetails() {
         </>
     )
 }
-
-MovieDetails.propTypes = {
-    movieId: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    poster_path: PropTypes.string.isRequired,
-    original_title: PropTypes.string.isRequired,
-    vote_average: PropTypes.string.isRequired,
-    overview: PropTypes.string.isRequired,
-    genres: PropTypes.string.isRequired
-  };

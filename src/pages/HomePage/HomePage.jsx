@@ -1,7 +1,6 @@
 import React, { useEffect } from "react"
 import { useState } from "react"
 import { Link, useLocation } from "react-router-dom";
-import PropTypes from 'prop-types';
 
 import style from './HomePage.module.css';
 import { getTrendingMovies } from "api/movie-api"
@@ -30,8 +29,8 @@ export default function Home() {
                 id, 
                 title,
             }) => (
-                <ul>
-                    <li key={id}>
+                <ul key={id}>
+                    <li>
                         <Link to={`/movies/${id}`} state={{ from: location }}>
                             <p>{title}</p>
                         </Link>
@@ -44,7 +43,3 @@ export default function Home() {
     )
 }
 
-Home.propTypes = {
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-  };

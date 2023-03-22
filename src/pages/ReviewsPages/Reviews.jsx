@@ -2,20 +2,21 @@ import { getMovieReview } from "api/movie-api";
 import React from "react"
 import { useState } from "react";
 import { useEffect } from "react";
-import PropTypes from 'prop-types';
+import { useParams } from "react-router-dom";
 
-export default function Reviews({ movieId }) {
+export default function Reviews() {
     const [review, setReview] = useState([]);
+    const { movieId } = useParams();
 
-    useEffect(() => {
-        const getCast = async () => {
-          const { review } = await getMovieReview(movieId);
-          setReview(review);
+      useEffect(() => {
+        if (!movieId) return;
+        const getReview = async id => {
+          const getInfoReview = await getMovieReview(id);
+          setReview(getInfoReview);
         };
     
-        getCast();
+        getReview(movieId);
       }, [movieId]);
-
 
   return (
     <>
@@ -36,7 +37,3 @@ export default function Reviews({ movieId }) {
       </>
   );
 }
-
-Reviews.propTypes = {
-    movieId: PropTypes.string.isRequired,
-  };
